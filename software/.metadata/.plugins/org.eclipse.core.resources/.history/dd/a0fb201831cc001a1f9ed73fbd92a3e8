@@ -1,0 +1,271 @@
+/* 
+ * "Small Hello World" example. 
+ * 
+ * This example prints 'Hello from Nios II' to the STDOUT stream. It runs on
+ * the Nios II 'standard', 'full_featured', 'fast', and 'low_cost' example 
+ * designs. It requires a STDOUT  device in your system's hardware. 
+ *
+ * The purpose of this example is to demonstrate the smallest possible Hello 
+ * World application, using the Nios II HAL library.  The memory footprint
+ * of this hosted application is ~332 bytes by default using the standard 
+ * reference design.  For a more fully featured Hello World application
+ * example, see the example titled "Hello World".
+ *
+ * The memory footprint of this example has been reduced by making the
+ * following changes to the normal "Hello World" example.
+ * Check in the Nios II Software Developers Manual for a more complete 
+ * description.
+ * 
+ * In the SW Application project (small_hello_world):
+ *
+ *  - In the C/C++ Build page
+ * 
+ *    - Set the Optimization Level to -Os
+ * 
+ * In System Library project (small_hello_world_syslib):
+ *  - In the C/C++ Build page
+ * 
+ *    - Set the Optimization Level to -Os
+ * 
+ *    - Define the preprocessor option ALT_NO_INSTRUCTION_EMULATION 
+ *      This removes software exception handling, which means that you cannot 
+ *      run code compiled for Nios II cpu with a hardware multiplier on a core 
+ *      without a the multiply unit. Check the Nios II Software Developers 
+ *      Manual for more details.
+ *
+ *  - In the System Library page:
+ *    - Set Periodic system timer and Timestamp timer to none
+ *      This prevents the automatic inclusion of the timer driver.
+ *
+ *    - Set Max file descriptors to 4
+ *      This reduces the size of the file handle pool.
+ *
+ *    - Check Main function does not exit
+ *    - Uncheck Clean exit (flush buffers)
+ *      This removes the unneeded call to exit when main returns, since it
+ *      won't.
+ *
+ *    - Check Don't use C++
+ *      This builds without the C++ support code.
+ *
+ *    - Check Small C library
+ *      This uses a reduced functionality C library, which lacks  
+ *      support for buffering, file IO, floating point and getch(), etc. 
+ *      Check the Nios II Software Developers Manual for a complete list.
+ *
+ *    - Check Reduced device drivers
+ *      This uses reduced functionality drivers if they're available. For the
+ *      standard design this means you get polled UART and JTAG UART drivers,
+ *      no support for the LCD driver and you lose the ability to program 
+ *      CFI compliant flash devices.
+ *
+ *    - Check Access device drivers directly
+ *      This bypasses the device file system to access device drivers directly.
+ *      This eliminates the space required for the device file system services.
+ *      It also provides a HAL version of libc services that access the drivers
+ *      directly, further reducing space. Only a limited number of libc
+ *      functions are available in this configuration.
+ *
+ *    - Use ALT versions of stdio routines:
+ *
+ *           Function                  Description
+ *        ===============  =====================================
+ *        alt_printf       Only supports %s, %x, and %c ( < 1 Kbyte)
+ *        alt_putstr       Smaller overhead than puts with direct drivers
+ *                         Note this function doesn't add a newline.
+ *        alt_putchar      Smaller overhead than putchar with direct drivers
+ *        alt_getchar      Smaller overhead than getchar with direct drivers
+ *
+ */
+
+#include "sys/alt_stdio.h"
+#include "system.h"
+#include "altera_avalon_i2c.h"
+#include "altera_avalon_timer_regs.h"
+#include "sys/alt_irq.h"
+
+#include "altera_avalon_timer.h"
+#include "altera_avalon_pio_regs.h"
+#include "SPI_GPIO.h"
+#include "defines.h"
+
+void handle_timer_interrupt(void*p, alt_u32 param);
+void MashLED();
+void MachPower();
+
+#define SPI_GPIO_USER_LED (1<<0)
+#define SPI_GPIO_STBY_LED (1<<1)
+#define SPI_GPIO_HD_LED   (1<<2)
+#define SPI_GPIO_P_LED    (1<<3)
+#define SPI_GPIO_LED_2_G  (1<<4)
+#define SPI_GPIO_LED_2_R  (1<<5)
+#define SPI_GPIO_LED_1_G  (1<<6)
+#define SPI_GPIO_LED_1_R  (1<<7)
+#define SPI_GPIO_JTAG_RST  (1<<8)
+#define SPI_GPIO_EJTAG_RST  (1<<9)
+#define SPI_GPIO_3V3_MUX_SEL  (1<<10)
+#define SPI_GPIO_3V3_ENA_FET_MUX_SEL  (1<<11)
+#define SPI_GPIO_PEX_PWREN  (1<<12)
+#define SPI_GPIO_ATX_PSON   (1<<13)
+#define SPI_GPIO_FPGA_LED 	(1<<14)
+#define SPI_GPIO_LED_PGOOD  (1<<15)
+
+#define TIME_1_SEC  1000
+#define TIME_300_MS 300
+#define TIME_100_MS 100
+#define TIME_10_MS  10
+struct {
+volatile 	alt_u8  TimerTick:1;
+volatile 	alt_u8	Timer1Sec:1;
+volatile 	alt_u8  TimerPowerTick:1;
+volatile 	int  	Timer1Sec_Counter;
+volatile 	int  	TimerPower_Counter;
+volatile 	int  	CLKTimer;
+
+volatile 	int  	t_int;
+volatile 	int  	MS_counter;
+
+
+alt_u8 ClockStage;
+alt_u8 PowerStage;
+alt_u8 PowerOK;
+alt_u8 PowerFail;
+alt_u8 PowerOnTimer;
+alt_u8 TemperatureValid:1;
+alt_u8 TemperatureOK:1;
+
+}SysCntrl;
+
+alt_u32 GetPIO(){
+	return IORD_ALTERA_AVALON_PIO_DATA(PIO_IN_BASE);
+}
+
+
+#define ATX_PWRGOOD_MASK (1<<0)
+
+int main()
+{
+	int counter;
+	SysCntrl.MS_counter = 0;
+	SysCntrl.PowerStage = POWER_STATE_INIT;
+
+  alt_putstr("Hello from Nios II!\n");
+  SPI_GPIOInit();
+
+  alt_ic_isr_register(TIMER_0_IRQ_INTERRUPT_CONTROLLER_ID,TIMER_0_IRQ,handle_timer_interrupt,&SysCntrl.t_int,0);
+  /* Event loop never exits. */
+  // activate the time
+  IOWR_ALTERA_AVALON_TIMER_CONTROL(TIMER_0_BASE,
+                  ALTERA_AVALON_TIMER_CONTROL_CONT_MSK
+                | ALTERA_AVALON_TIMER_CONTROL_START_MSK
+                | ALTERA_AVALON_TIMER_CONTROL_ITO_MSK);
+
+  alt_ic_irq_enabled(TIMER_0_IRQ_INTERRUPT_CONTROLLER_ID,TIMER_0_IRQ);
+
+  counter = 0;
+  while (1) {
+	  if(SysCntrl.TimerTick) {
+		  SysCntrl.TimerTick = 0;
+		  counter++;
+		  if(counter >= 1000) {
+			  counter = 0;
+			  if(GetPIO()&ATX_PWRGOOD_MASK)
+				  alt_putstr("ATX POWER ready\n\r");
+			  else
+				  alt_putstr("ATX POWER not ready\n\r");
+		  }
+
+		  switch(SysCntrl.MS_counter%10){
+		  case 0:
+			  MachPower();
+			  break;
+		  case 1:
+			  MashLED();	   // Tick every 10 ms
+			  break;
+		  case 2:
+			  break;
+		  case 3:
+			  break;
+		  case 4:
+			  break;
+		  case 5:
+			  break;
+		  case 6:
+			  break;
+		  case 7:
+			  break;
+		  case 8:
+			  break;
+		  case 9:
+			  SPI_GPIO_Mash(); // Tick every 10 ms.
+			  break;
+		  }
+	  }
+  }
+
+  return 0;
+}
+//-----------------------------------------------------------------
+void MachPower(){
+	switch(SysCntrl.PowerStage) {
+	case	POWER_STATE_INIT:
+		SysCntrl.PowerStage 		=	POWER_STATE_S0;
+		SysCntrl.TimerPower_Counter =	TIME_100_MS;
+		break;
+	case	POWER_STATE_S0:
+		if(SysCntrl.TimerPower_Counter)break;
+		// Enable ATX power
+		SPI_GPIO_Set(SPI_GPIO_ATX_PSON);
+		SysCntrl.PowerStage 		=	POWER_STATE_S1;
+		SysCntrl.TimerPower_Counter =	TIME_100_MS;
+		break;
+	case	POWER_STATE_S1:
+		if(SysCntrl.TimerPower_Counter)break;
+		if(GetPIO()&ATX_PWRGOOD_MASK)
+			SysCntrl.PowerStage 		=	POWER_STATE_S2;
+		else
+			SysCntrl.PowerStage 		=	POWER_STATE_ATX_FAIL;
+		break;
+	case	POWER_STATE_S2:
+		break;
+	case	POWER_STATE_ATX_FAIL:
+
+		break;
+	}
+}
+
+void MashLED() {
+	if((SysCntrl.MS_counter < 100) || ((SysCntrl.MS_counter > 300) && (SysCntrl.MS_counter < 400)) )
+		SPI_GPIO_Set(SPI_GPIO_FPGA_LED);
+	else
+		SPI_GPIO_Clr(SPI_GPIO_FPGA_LED);
+}
+
+void handle_timer_interrupt(void*p, alt_u32 param)
+{
+   // clear irq status in order to prevent retriggering
+   IOWR_ALTERA_AVALON_TIMER_STATUS(TIMER_0_BASE, 0);
+   SysCntrl.TimerTick = 1;
+   if(++SysCntrl.MS_counter>999)SysCntrl.MS_counter = 0;
+
+   if(SysCntrl.TimerPower_Counter)SysCntrl.TimerPower_Counter--;
+
+   /*
+   SysCntrl.Timer1Sec_Counter = SysCntrl.Timer1Sec_Counter - 1;
+   if(!SysCntrl.Timer1Sec_Counter) {
+	   SysCntrl.Timer1Sec_Counter = TIME_1_SEC;
+	   SysCntrl.Timer1Sec = 1;
+   }
+
+   SysCntrl.TimerPower_Counter--;
+   if(!SysCntrl.TimerPower_Counter) {
+	   SysCntrl.TimerPower_Counter = TIME_10_MS;
+	   SysCntrl.TimerPowerTick = 1;
+   }
+
+   if(SysCntrl.CLKTimer)
+	   SysCntrl.CLKTimer--;
+	   */
+
+}
+

@@ -1,0 +1,237 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "SFP_PWR_ENA",
+					"strict" : false
+				},
+				{
+					"name" : "DISABLE_1V5",
+					"strict" : false
+				},
+				{
+					"name" : "DISABLE_1V8",
+					"strict" : false
+				},
+				{
+					"name" : "DISABLE_0V95",
+					"strict" : false
+				},
+				{
+					"name" : "CLK_SSON",
+					"strict" : false
+				},
+				{
+					"name" : "CLK_PWRGD",
+					"strict" : false
+				},
+				{
+					"name" : "CLK_SDOE",
+					"strict" : false
+				},
+				{
+					"name" : "OE_SLOT_0",
+					"strict" : false
+				},
+				{
+					"name" : "OE_SLOT_1",
+					"strict" : false
+				},
+				{
+					"name" : "OE_SLOT_2",
+					"strict" : false
+				},
+				{
+					"name" : "OE_SLOT_3",
+					"strict" : false
+				},
+				{
+					"name" : "OE_BLK_REFCLK",
+					"strict" : false
+				},
+				{
+					"name" : "OE_PEX_REFCLK",
+					"strict" : false
+				},
+				{
+					"name" : "SLOT_PERST",
+					"strict" : false
+				},
+				{
+					"name" : "UART_TXD",
+					"strict" : false
+				},
+				{
+					"name" : "TEST_F14",
+					"strict" : false
+				},
+				{
+					"name" : "ENA_CPU_BOOT_SPI",
+					"strict" : false
+				},
+				{
+					"name" : "TEST_SEL",
+					"strict" : false
+				},
+				{
+					"name" : "SYS_RESET_N",
+					"strict" : false
+				},
+				{
+					"name" : "BMC_SPI_CLK",
+					"strict" : false
+				},
+				{
+					"name" : "BMC_SPI_CS",
+					"strict" : false
+				},
+				{
+					"name" : "GPIO_CS",
+					"strict" : false
+				},
+				{
+					"name" : "GPIO_CLK",
+					"strict" : false
+				},
+				{
+					"name" : "GPIO_MOSI",
+					"strict" : false
+				},
+				{
+					"name" : "CLK_SCL",
+					"strict" : false
+				},
+				{
+					"name" : "CLK_SDA",
+					"strict" : false
+				},
+				{
+					"name" : "BOOT_CFG_0",
+					"strict" : false
+				},
+				{
+					"name" : "BOOT_CFG_1",
+					"strict" : false
+				},
+				{
+					"name" : "CPU_RESET",
+					"strict" : false
+				},
+				{
+					"name" : "PEX_PERST",
+					"strict" : false
+				},
+				{
+					"name" : "PEX_NT_PERST",
+					"strict" : false
+				},
+				{
+					"name" : "HP_PRSNT_A",
+					"strict" : false
+				},
+				{
+					"name" : "HP_MRL_A",
+					"strict" : false
+				},
+				{
+					"name" : "CPU_INT",
+					"strict" : false
+				},
+				{
+					"name" : "PM_I2C_SDA",
+					"strict" : false
+				},
+				{
+					"name" : "PM_I2C_SCL",
+					"strict" : false
+				},
+				{
+					"name" : "BMC_SPI_MOSI",
+					"strict" : false
+				},
+				{
+					"name" : "BMC_SPI_MISO",
+					"strict" : false
+				},
+				{
+					"name" : "SFP_MODEDEF",
+					"strict" : false
+				},
+				{
+					"name" : "PMIC_PGOOD",
+					"strict" : false
+				},
+				{
+					"name" : "DIP_SW_2",
+					"strict" : false
+				},
+				{
+					"name" : "clk",
+					"strict" : false
+				},
+				{
+					"name" : "SFP_RX_LOS",
+					"strict" : false
+				},
+				{
+					"name" : "UART_RXD",
+					"strict" : false
+				},
+				{
+					"name" : "SLOT_PRSNT_3",
+					"strict" : false
+				},
+				{
+					"name" : "SLOT_PRSNT_2",
+					"strict" : false
+				},
+				{
+					"name" : "SLOT_PRSNT_1",
+					"strict" : false
+				},
+				{
+					"name" : "SLOT_PRSNT_0",
+					"strict" : false
+				},
+				{
+					"name" : "ATX_PGOOD",
+					"strict" : false
+				},
+				{
+					"name" : "PWR_BTN",
+					"strict" : false
+				},
+				{
+					"name" : "RST_SW",
+					"strict" : false
+				},
+				{
+					"name" : "EXT_CPURESET",
+					"strict" : false
+				},
+				{
+					"name" : "GPIO_MISO",
+					"strict" : false
+				},
+				{
+					"name" : "altera_reserved_tms",
+					"strict" : false
+				},
+				{
+					"name" : "altera_reserved_tck",
+					"strict" : false
+				},
+				{
+					"name" : "altera_reserved_tdi",
+					"strict" : false
+				},
+				{
+					"name" : "altera_reserved_tdo",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

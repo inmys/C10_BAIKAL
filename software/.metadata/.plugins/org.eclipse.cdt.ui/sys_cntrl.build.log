@@ -1,0 +1,13 @@
+20:34:21 **** Build of configuration Nios II for project sys_cntrl ****
+wsl make all 
+Info: Building /mnt/d/fpga/C10_BAIKAL/software/sys_cntrl_bsp/
+make --no-print-directory -C /mnt/d/fpga/C10_BAIKAL/software/sys_cntrl_bsp/
+Makefile:571: Warning: SOPC File D:/fpga/C10_BAIKAL/sopc_top.sopcinfo could not be found.
+Compiling alt_alarm_start.c...
+make[1]: nios2-elf-gcc: Command not found
+nios2-elf-gcc -xc -MP -MMD -c  -I./HAL/inc -I. -I./drivers/inc -pipe -D__hal__ -DALT_NO_C_PLUS_PLUS -DALT_NO_CLEAN_EXIT -D'exit(a)=_exit(a)' -DALT_NO_EXIT -DALT_USE_DIRECT_DRIVERS -DALT_NO_INSTRUCTION_EMULATION -DALT_USE_SMALL_DRIVERS -DSMALL_C_LIB -DALT_SINGLE_THREADED -DALTERA_AVALON_JTAG_UART_IGNORE_FIFO_FULL_ERROR    '-Os' -g -Wall  -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global   -o obj/HAL/src/alt_alarm_start.o HAL/src/alt_alarm_start.c
+make[1]: *** [Makefile:598: obj/HAL/src/alt_alarm_start.o] Error 127
+make: *** [Makefile:840: /mnt/d/fpga/C10_BAIKAL/software/sys_cntrl_bsp/-recurs-make-lib] Error 2
+
+20:34:23 Build Finished (took 1s.706ms)
+

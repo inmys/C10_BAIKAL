@@ -1,0 +1,49 @@
+module C10_BAIKAL(
+input wire clk,
+input wire reset,
+
+//----------SFP PINS---------
+input 	wire SFP_MODEDEF,
+input 	wire SFP_TX_FAULT,
+input 	wire SFP_RX_LOS,
+input 	wire SFP_RS_0,
+input 	wire SFP_RS_1,
+output 	wire SFP_TXDIS,
+output	wire SFP_PWR_ENA,
+output	wire SFP_PWR_FLT,
+
+//----------SFP PINS---------
+output	wire	SPI_CLK,
+output	wire	SPI_MOSI,
+input 	wire	SPI_MISO,
+output	wire	SPI_CS_0,
+output	wire	SPI_CS_1,
+
+//----------PMIC CONTROL-----
+output	wire  DISABLE_1V5,
+output	wire  DISABLE_1V8,
+output	wire  DISABLE_0V95,
+input 	wire	PMIC_PGOOD,
+input 	wire	PEX_PGOOD,
+
+//----------Clock control----
+inout 	wire	CLK_SCL,
+inout 	wire	CLK_SDA,
+output 	wire	CLK_SSON,
+output 	wire	CLK_PWRGD,
+
+
+//----------GPIO Serial 2 Parralel----
+output	wire	GPIO_CS,
+output	wire	GPIO_CLK,
+output	wire	GPIO_MOSI,
+output	wire	GPIO_MISO
+
+
+);
+
+assign DISABLE_1V5  = 1'b1;
+assign DISABLE_1V8  = 1'b1; 
+assign DISABLE_0V95 = 1'b1;
+
+endmodule

@@ -1,0 +1,18 @@
+/*
+ * defines.h
+ *
+ *  Created on: 22 июля 2020 г.
+ *      Author: ikoml
+ */
+
+#ifndef DEFINES_H_
+#define DEFINES_H_
+
+#define POWER_STATE_INIT (0)
+#define POWER_STATE_S0 	 (5)
+#define POWER_STATE_S1 	 (10)
+#define POWER_STATE_S2 	 (15)
+#define POWER_STATE_S3 	 (20)
+#define POWER_STATE_ATX_FAIL (250)
+
+#endif /* DEFINES_H_ */

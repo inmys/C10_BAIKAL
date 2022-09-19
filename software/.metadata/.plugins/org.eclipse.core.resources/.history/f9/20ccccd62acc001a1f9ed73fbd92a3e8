@@ -1,0 +1,18 @@
+/*
+ * SPI_GPIO.h
+ *
+ *  Created on: 22 июля 2020 г.
+ *      Author: ikoml
+ */
+#ifndef SPI_GPIO_H_
+#define SPI_GPIO_H_
+
+
+alt_u32 SPIReadReg(int);
+void SPIWriteReg(int,alt_u32);
+void SPI_TxData(alt_u32);
+void SPI_GPIOInit();
+void SPI_GPIOWrite(alt_u32);
+
+
+#endif /* SPI_GPIO_H_ */

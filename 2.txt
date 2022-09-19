@@ -1,0 +1,143 @@
+
+Usage: qsys-generate <file>
+
+   OPTION                                                 DESCRIPTION
+   <1st arg file>                                         .qsys file
+   -syn, --synthesis[=<VERILOG|VHDL>]                   ? Create synthesis files.
+   -bsf, --block-symbol-file                            ? Create block symbol file (.bsf).
+   -greybox, --greybox                                  ? Create timing and resource estimates for third-parth EDA synthesis.
+   -ipxact, --ipxact                                    ? Create an IPXACT representation of your system.
+   -sim, --simulation[=<VERILOG|VHDL>]                  ? Create simulation model.
+   -tb, --testbench[=<SIMPLE|STANDARD>]                 ? Create testbench system.
+   -tb-sim, --testbench-simulation[=<VERILOG|VHDL>]     ? Create simulation model for the testbench system.
+   -ed, --example-design[=<value>]                      ? Create example design files.
+   -od, --output-directory=<value>                      ? The output directory
+   -sp, --search-path=<value>                           ? IP component search path 
+   --family=<value>                                     ? The device family
+   --part=<value>                                       ? The device part
+   -amls, --allow-mixed-language-simulation             ? Enables mixed-language simulation model generation.
+   -amltbs, --allow-mixed-language-testbench-simulation ? Enables mixed-language simulation testbench model generation.
+   -uvf, --upgrade-variation-file                       ? Enables upgrading a megawizard variation file to a Standalone IP in a Platform Designer format file
+   -uic, --upgrade-ip-cores                             ? Enables upgrading all the ip cores that are available in the Platform Designer system.
+   -cod , --clear-output-directory                      ? Clears the output directory corresponding to the selected target, i.e. simulation or synthesis.
+   -eqs, --export-qsys-script                           ? Exports the .qsys file system as a Platform Designer script file (.tcl).
+   --jvm-max-heap-size=<value>                          ? Set the maximum heap memory size to be used
+   -h, --help                                           ? Show help
+
+QSYS-GENERATE
+-------------
+Generate a Platform Designer system.
+
+<1st arg file>
+     Required. The name of the .qsys system file to generate.
+
+--synthesis[=<VERILOG|VHDL>]
+     Optional. Create synthesis HDL files, used to compile the system in
+     a Quartus project. The default is "VERILOG".
+
+--block-symbol-file
+     Optional. Create a block symbol file (.bsf) for the system.
+
+--greybox
+     Optional. If you are synthesizing your design with a third-party
+     EDA synthesis tool, you can generate a netlist for the synthesis
+     tool to estimate timing and resource usage for this design.
+
+--ipxact
+     Optional. When the value of this switch is true, the
+     post-generation system will be rendered as an IPXACT-compatible
+     component description.
+
+--simulation[=<VERILOG|VHDL>]
+     Optional. Create a simulation model for the system. The simulation
+     model contains generated HDL files for the simulator, and may
+     include simulation-only features. The default is "VERILOG".
+
+--testbench[=<SIMPLE|STANDARD>]
+     Optional. Create a testbench system. The testbench system
+     instantiates the original system, adding bus functional models to
+     drive the top-level interfaces. Once generated, the bus functional
+     models can interact with the system in the simulator. The default
+     is "STANDARD".
+
+--testbench-simulation[=<VERILOG|VHDL>]
+     Optional. After creating the testbench system, also create a
+     simulation model for the testbench system. The default is
+     "VERILOG".
+
+--example-design[=<value>]
+     Optional. Create example design files. For example:
+     --example-design (or) --example-design=all. The default is "All",
+     which generates example designs for all instances. Alternatively,
+     you can choose specific filesets based on instance name and fileset
+     name. For example
+     --example-design=instance0.example_design1,instance1.example_design
+     2. You can also specify an output directory to where the files will
+     be created.
+
+--output-directory=<value>
+     Optional. Set the output directory. Each generation target is
+     created in a subdirectory of the output directory. If the output
+     directory is not specified, a subdirectory of the current working
+     directory matching the name of the system will be used.
+
+--search-path=<value>
+     Optional. If omitted, a standard default path will be used. If
+     provided, a comma-separated list of paths will be searched. To
+     include the standard path in your replacement, use "$", like
+     "/extra/dir,$".
+
+--family=<value>
+     Optional. Set the device family.
+
+--part=<value>
+     Optional. Set the device part number. If set, this option overrides
+     the "--family" option.
+
+--allow-mixed-language-simulation
+     Optional. When the value of this switch is true, if the author of a
+     component in the design has declared a 'preferred' simulation
+     language, a fileset of the component that best matches the language
+     will be used for the simulation model generation. When this switch
+     is not used (default) or its value is false, the simulation target
+     language specified through the file-set switch will used for all
+     components for simulation model generation. 
+
+--allow-mixed-language-testbench-simulation
+     Optional. When the value of this switch is true, if the author of a
+     component in the design has declared a 'preferred' simulation
+     language, a fileset of the component that best matches the language
+     will be used for the testbench simulation model generation. When
+     this switch is not used (default) or its value is false, the
+     simulation target language specified through the file-set switch
+     will used for all components for testbench simulation model
+     generation. 
+
+--upgrade-variation-file
+     Optional. When the value of this switch is true, the file argument
+     for this command will accept a ".v" filewhich contains a megawizard
+     variant. This file will parameterize a corresponding instance in a
+     Platform Designer system of the same name.
+
+--upgrade-ip-cores
+     Optional. Enables upgrading all the ip cores that are available in
+     the Platform Designer system.
+
+--clear-output-directory
+     Optional. Clears the output directory corresponding to the selected
+     target, i.e. simulation or synthesis. 
+
+--export-qsys-script
+     Optional. When the value of this switch is true, the
+     post-generation system will be exported as a Platform Designer
+     script file with the extension (.tcl).
+
+--jvm-max-heap-size=<value>
+     Optional. The maximum memory size to be used for allocations when
+     running this tool. This value is specified as <size><unit> where
+     unit can be m (or M) for multiples of megabytes or g (or G) for
+     multiples of gigabytes. The default value is 512m.
+
+--help
+     Optional. Display help for this tool
+

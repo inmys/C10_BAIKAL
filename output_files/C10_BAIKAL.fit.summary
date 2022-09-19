@@ -1,0 +1,16 @@
+Fitter Status : Successful - Mon Sep  5 11:08:15 2022
+Quartus Prime Version : 18.0.0 Build 614 04/24/2018 SJ Standard Edition
+Revision Name : C10_BAIKAL
+Top-level Entity Name : C10_BAIKAL
+Family : Cyclone 10 LP
+Device : 10CL006YE144C8G
+Timing Models : Final
+Total logic elements : 5,117 / 6,272 ( 82 % )
+    Total combinational functions : 4,472 / 6,272 ( 71 % )
+    Dedicated logic registers : 3,170 / 6,272 ( 51 % )
+Total registers : 3170
+Total pins : 82 / 89 ( 92 % )
+Total virtual pins : 0
+Total memory bits : 155,776 / 276,480 ( 56 % )
+Embedded Multiplier 9-bit elements : 6 / 30 ( 20 % )
+Total PLLs : 1 / 2 ( 50 % )

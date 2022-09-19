@@ -1,0 +1,72 @@
+/*
+ * SPI_GPIO.c
+ *
+ *  Created on: 22 июля 2020 г.
+ *      Author: ikoml
+ */
+#include "sys/alt_dev.h"
+#include "alt_types.h"
+#include "sys/alt_stdio.h"
+#include "system.h"
+#include "SPI_GPIO.h"
+#include "io.h"
+
+#define SPI_RX_REG 0
+#define SPI_TX_REG 1
+#define SPI_STATUS_REG 2
+#define SPI_CONTROL_REG 3
+#define SPI_SLAVESEL_REG 5
+#define SPI_EOPVAL_REG 6
+
+#define SPI_STAT_TRDY (1<<6)	/* transmit ready*/
+alt_u32 SPIReadReg(int id){
+	return IORD_32DIRECT(SPI_0_BASE,id*4);
+}
+
+void SPIWriteReg(int id, alt_u32 value) {
+	IOWR_32DIRECT(SPI_0_BASE,id*4,value);
+}
+
+void SPI_TxData(alt_u32 value) {
+	alt_u32 t;
+
+	while(!(SPIReadReg(SPI_STATUS_REG) & SPI_STAT_TRDY));
+	SPIWriteReg(SPI_TX_REG,value);
+}
+
+#define IODIRA  (0x00)
+#define IPOLA		(0x01)
+#define GPINTENA	(0x02)
+#define DEFVALA		(0x03)
+#define INTCONA		(0x04)
+#define IOCON		(0x05)
+#define GPPUA		(0x06)
+#define INTFA		(0x07)
+#define INTCAPA		(0x08)
+#define GPIOA		(0x09)
+#define OLATA		(0x0A)
+#define IODIRB		(0x10)
+#define IPOLB		(0x11)
+#define GPINTENB	(0x12)
+#define DEFVALB		(0x13)
+#define INTCONB		(0x14)
+#define IOCONB		(0x15)
+#define GPPUB		(0x16)
+#define INTFB		(0x17)
+#define INTCAPB		(0x18)
+#define GPIOB		(0x19)
+#define OLATB		(0x1A)
+
+#define SPI_MCP_OPCODE_READ  (0x400000)
+#define SPI_MCP_OPCODE_WRITE (0x410000)
+void SPI_GPIOInit(){
+
+	SPI_TxData(SPI_MCP_OPCODE_WRITE|(IODIRA<<8)|0); //Set Output
+	SPI_TxData(SPI_MCP_OPCODE_WRITE|(IODIRB<<8)|0); //Set Output
+}
+
+void SPI_GPIOWrite(alt_u32 pio_value){
+	SPI_TxData(SPI_MCP_OPCODE_WRITE|(GPIOA<<8)|(pio_value&0xff));
+	//SPI_TxData(SPI_MCP_OPCODE_WRITE|(GPIOB<<8)|((pio_value>>8)&0xff));
+}
+

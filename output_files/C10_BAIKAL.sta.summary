@@ -1,0 +1,161 @@
+------------------------------------------------------------
+Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Slow 1200mV 85C Model Setup 'sopc_top:sopc_0|sopc_top_altpll_0:altpll_0|sopc_top_altpll_0_altpll_mdh2:sd1|wire_pll7_clk[0]'
+Slack : 1.216
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Setup 'clk'
+Slack : 36.936
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Setup 'altera_reserved_tck'
+Slack : 43.913
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'sopc_top:sopc_0|sopc_top_altpll_0:altpll_0|sopc_top_altpll_0_altpll_mdh2:sd1|wire_pll7_clk[0]'
+Slack : 0.336
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'clk'
+Slack : 0.452
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'altera_reserved_tck'
+Slack : 0.453
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Recovery 'sopc_top:sopc_0|sopc_top_altpll_0:altpll_0|sopc_top_altpll_0_altpll_mdh2:sd1|wire_pll7_clk[0]'
+Slack : 5.179
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Recovery 'altera_reserved_tck'
+Slack : 47.474
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Removal 'altera_reserved_tck'
+Slack : 1.426
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Removal 'sopc_top:sopc_0|sopc_top_altpll_0:altpll_0|sopc_top_altpll_0_altpll_mdh2:sd1|wire_pll7_clk[0]'
+Slack : 2.540
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'sopc_top:sopc_0|sopc_top_altpll_0:altpll_0|sopc_top_altpll_0_altpll_mdh2:sd1|wire_pll7_clk[0]'
+Slack : 4.500
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clk'
+Slack : 19.695
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'altera_reserved_tck'
+Slack : 49.404
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Setup 'sopc_top:sopc_0|sopc_top_altpll_0:altpll_0|sopc_top_altpll_0_altpll_mdh2:sd1|wire_pll7_clk[0]'
+Slack : 1.817
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Setup 'clk'
+Slack : 37.244
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Setup 'altera_reserved_tck'
+Slack : 44.335
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'sopc_top:sopc_0|sopc_top_altpll_0:altpll_0|sopc_top_altpll_0_altpll_mdh2:sd1|wire_pll7_clk[0]'
+Slack : 0.327
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'clk'
+Slack : 0.401
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'altera_reserved_tck'
+Slack : 0.402
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Recovery 'sopc_top:sopc_0|sopc_top_altpll_0:altpll_0|sopc_top_altpll_0_altpll_mdh2:sd1|wire_pll7_clk[0]'
+Slack : 5.532
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Recovery 'altera_reserved_tck'
+Slack : 47.782
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Removal 'altera_reserved_tck'
+Slack : 1.274
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Removal 'sopc_top:sopc_0|sopc_top_altpll_0:altpll_0|sopc_top_altpll_0_altpll_mdh2:sd1|wire_pll7_clk[0]'
+Slack : 2.265
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'sopc_top:sopc_0|sopc_top_altpll_0:altpll_0|sopc_top_altpll_0_altpll_mdh2:sd1|wire_pll7_clk[0]'
+Slack : 4.531
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clk'
+Slack : 19.710
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'altera_reserved_tck'
+Slack : 49.278
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Setup 'sopc_top:sopc_0|sopc_top_altpll_0:altpll_0|sopc_top_altpll_0_altpll_mdh2:sd1|wire_pll7_clk[0]'
+Slack : 6.168
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Setup 'clk'
+Slack : 38.672
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Setup 'altera_reserved_tck'
+Slack : 47.637
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'sopc_top:sopc_0|sopc_top_altpll_0:altpll_0|sopc_top_altpll_0_altpll_mdh2:sd1|wire_pll7_clk[0]'
+Slack : 0.107
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'altera_reserved_tck'
+Slack : 0.186
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'clk'
+Slack : 0.187
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Recovery 'sopc_top:sopc_0|sopc_top_altpll_0:altpll_0|sopc_top_altpll_0_altpll_mdh2:sd1|wire_pll7_clk[0]'
+Slack : 7.809
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Recovery 'altera_reserved_tck'
+Slack : 49.163
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Removal 'altera_reserved_tck'
+Slack : 0.586
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Removal 'sopc_top:sopc_0|sopc_top_altpll_0:altpll_0|sopc_top_altpll_0_altpll_mdh2:sd1|wire_pll7_clk[0]'
+Slack : 1.149
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'sopc_top:sopc_0|sopc_top_altpll_0:altpll_0|sopc_top_altpll_0_altpll_mdh2:sd1|wire_pll7_clk[0]'
+Slack : 4.704
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clk'
+Slack : 19.241
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'altera_reserved_tck'
+Slack : 49.271
+TNS   : 0.000
+
+------------------------------------------------------------

@@ -1,0 +1,35 @@
+/*
+ * SPI_GPIO.c
+ *
+ *  Created on: 22 июля 2020 г.
+ *      Author: ikoml
+ */
+#include "sys/alt_stdio.h"
+#include "system.h"
+#include "SPI_GPIO.h"
+
+#define SPI_RX_REG 0
+#define SPI_TX_REG 1
+#define SPI_STATUS_REG 2
+#define SPI_CONTROL_REG 3
+#define SPI_SLAVESEL_REG 5
+#define SPI_EOPVAL_REG 6
+
+#define SPI_STAT_TRDY (1<<6)	/* transmit ready*/
+alt_u32 SPIReadReg(int id){
+	return IORD32_DIRECT(SPI_0_BASE,id);
+}
+
+void SPIWriteReg(int id, alt_u32 value) {
+	IOWR32_DIRECT(SPI_0_BASE,id,value);
+}
+
+void SPI_TxData(alt_u32 value) {
+	alt_u32 t;
+
+	while(!(SPIReadReg(SPI_STATUS_REG) & SPI_STAT_TRDY));
+	SPIWriteReg(SPI_TX_REG,value)
+}
+
+
+

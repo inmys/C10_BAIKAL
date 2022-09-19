@@ -1,0 +1,31 @@
+	component sopc_top is
+		port (
+			altpll_0_areset_export    : in  std_logic                     := 'X';             -- export
+			altpll_0_inclk0_clk       : in  std_logic                     := 'X';             -- clk
+			altpll_0_locked_export    : out std_logic;                                        -- export
+			bmc_spi_MISO              : in  std_logic                     := 'X';             -- MISO
+			bmc_spi_MOSI              : out std_logic;                                        -- MOSI
+			bmc_spi_SCLK              : out std_logic;                                        -- SCLK
+			bmc_spi_SS_n              : out std_logic;                                        -- SS_n
+			i2c_0_sda_in              : in  std_logic                     := 'X';             -- sda_in
+			i2c_0_scl_in              : in  std_logic                     := 'X';             -- scl_in
+			i2c_0_sda_oe              : out std_logic;                                        -- sda_oe
+			i2c_0_scl_oe              : out std_logic;                                        -- scl_oe
+			i2cslave_conduit_data_in  : in  std_logic                     := 'X';             -- conduit_data_in
+			i2cslave_conduit_clk_in   : in  std_logic                     := 'X';             -- conduit_clk_in
+			i2cslave_conduit_data_oe  : out std_logic;                                        -- conduit_data_oe
+			i2cslave_conduit_clk_oe   : out std_logic;                                        -- conduit_clk_oe
+			id32k_clk                 : out std_logic;                                        -- clk
+			pio_in_export             : in  std_logic_vector(31 downto 0) := (others => 'X'); -- export
+			pio_out_export            : out std_logic_vector(31 downto 0);                    -- export
+			reset_bridge_0_in_reset_n : in  std_logic                     := 'X';             -- reset_n
+			spi_0_MISO                : in  std_logic                     := 'X';             -- MISO
+			spi_0_MOSI                : out std_logic;                                        -- MOSI
+			spi_0_SCLK                : out std_logic;                                        -- SCLK
+			spi_0_SS_n                : out std_logic;                                        -- SS_n
+			uart_0_sin                : in  std_logic                     := 'X';             -- sin
+			uart_0_sout               : out std_logic;                                        -- sout
+			uart_0_sout_oe            : out std_logic                                         -- sout_oe
+		);
+	end component sopc_top;
+

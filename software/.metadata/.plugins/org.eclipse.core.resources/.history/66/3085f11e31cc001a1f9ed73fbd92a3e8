@@ -1,0 +1,17 @@
+/*
+ * defines.h
+ *
+ *  Created on: 22 июля 2020 г.
+ *      Author: ikoml
+ */
+
+#ifndef DEFINES_H_
+#define DEFINES_H_
+
+#define POWER_STATE_INIT (0)
+#define POWER_STATE_S0 	 (10)
+#define POWER_STATE_S1 	 (20)
+#define POWER_STATE_S2 	 (30)
+#define POWER_STATE_S3 	 (40)
+
+#endif /* DEFINES_H_ */

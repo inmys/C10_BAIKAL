@@ -1,0 +1,186 @@
+# -------------------------------------------------------------------------- #
+#
+# Copyright (C) 2020  Intel Corporation. All rights reserved.
+# Your use of Intel Corporation's design tools, logic functions 
+# and other software and tools, and any partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Intel Program License 
+# Subscription Agreement, the Intel Quartus Prime License Agreement,
+# the Intel FPGA IP License Agreement, or other applicable license
+# agreement, including, without limitation, that your use is for
+# the sole purpose of programming logic devices manufactured by
+# Intel and sold by Intel or its authorized distributors.  Please
+# refer to the applicable agreement for further details, at
+# https://fpgasoftware.intel.com/eula.
+#
+# -------------------------------------------------------------------------- #
+#
+# Quartus Prime
+# Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
+# Date created = 18:31:26  July 21, 2020
+#
+# -------------------------------------------------------------------------- #
+#
+# Notes:
+#
+# 1) The default values for assignments are stored in the file:
+#		C10_BAIKAL_assignment_defaults.qdf
+#    If this file doesn't exist, see file:
+#		assignment_defaults.qdf
+#
+# 2) Altera recommends that you do not modify this file. This
+#    file is updated automatically by the Quartus Prime software
+#    and any changes you make may be lost or overwritten.
+#
+# -------------------------------------------------------------------------- #
+
+
+set_global_assignment -name FAMILY "Cyclone 10 LP"
+set_global_assignment -name DEVICE 10CL006YE144C8G
+set_global_assignment -name TOP_LEVEL_ENTITY C10_BAIKAL
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION 20.1.0
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "18:31:26  JULY 21, 2020"
+set_global_assignment -name LAST_QUARTUS_VERSION "18.0.0 Standard Edition"
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 256
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name ENABLE_OCT_DONE OFF
+set_global_assignment -name ENABLE_CONFIGURATION_PINS OFF
+set_global_assignment -name ENABLE_BOOT_SEL_PIN OFF
+set_global_assignment -name USE_CONFIGURATION_DEVICE OFF
+set_global_assignment -name CRC_ERROR_OPEN_DRAIN OFF
+set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -rise
+set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -fall
+set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -rise
+set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -fall
+set_location_assignment PIN_1 -to SFP_MODEDEF
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to SFP_MODEDEF
+set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "3.3-V LVCMOS"
+set_location_assignment PIN_2 -to SFP_TX_FAULT
+set_location_assignment PIN_11 -to SFP_TXDIS
+set_location_assignment PIN_3 -to SFP_RX_LOS
+set_location_assignment PIN_10 -to SFP_RS_1
+set_location_assignment PIN_7 -to SFP_RS_0
+set_location_assignment PIN_90 -to PMIC_PGOOD
+set_location_assignment PIN_101 -to PEX_PGOOD
+set_location_assignment PIN_34 -to GPIO_CLK
+set_location_assignment PIN_31 -to GPIO_CS
+set_location_assignment PIN_33 -to GPIO_MISO
+set_location_assignment PIN_32 -to GPIO_MOSI
+set_location_assignment PIN_103 -to DISABLE_0V95
+set_location_assignment PIN_98 -to DISABLE_1V5
+set_location_assignment PIN_99 -to DISABLE_1V8
+set_location_assignment PIN_105 -to CLK_SDA
+set_location_assignment PIN_106 -to CLK_SCL
+set_location_assignment PIN_86 -to CLK_SSON
+set_location_assignment PIN_83 -to CLK_PWRGD
+set_global_assignment -name CYCLONEII_RESERVE_NCEO_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_global_assignment -name RESERVE_DATA0_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_global_assignment -name RESERVE_DATA1_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_global_assignment -name RESERVE_FLASH_NCE_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_global_assignment -name RESERVE_DCLK_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_location_assignment PIN_23 -to SFP_PWR_FLT
+set_location_assignment PIN_28 -to SFP_PWR_ENA
+set_location_assignment 8 -to SPI_CS_0
+set_location_assignment 6 -to SPI_MOSI
+set_location_assignment PIN_22 -to clk
+set_global_assignment -name ENABLE_SIGNALTAP OFF
+set_global_assignment -name USE_SIGNALTAP_FILE stp1.stp
+set_location_assignment PIN_84 -to ATX_PGOOD
+set_location_assignment PIN_72 -to CLK_SDOE
+set_location_assignment PIN_65 -to OE_BLK_REFCLK
+set_location_assignment PIN_69 -to OE_PEX_REFCLK
+set_location_assignment PIN_60 -to OE_SLOT_0
+set_location_assignment PIN_68 -to OE_SLOT_1
+set_location_assignment PIN_67 -to OE_SLOT_2
+set_location_assignment PIN_66 -to OE_SLOT_3
+set_location_assignment PIN_70 -to SLOT_PERST
+set_location_assignment PIN_54 -to SLOT_PRSNT_0
+set_location_assignment PIN_55 -to SLOT_PRSNT_1
+set_location_assignment PIN_58 -to SLOT_PRSNT_2
+set_location_assignment PIN_59 -to SLOT_PRSNT_3
+set_instance_assignment -name IO_MAXIMUM_TOGGLE_RATE "0 MHz" -to SFP_TXDIS
+set_location_assignment PIN_87 -to UART_TXD
+set_location_assignment PIN_88 -to UART_RXD
+set_location_assignment PIN_132 -to CPU_RESET
+set_location_assignment PIN_128 -to BOOT_CFG_0
+set_location_assignment PIN_129 -to BOOT_CFG_1
+set_location_assignment PIN_133 -to TAHO_IN_1_1V8
+set_location_assignment PIN_144 -to TAHO_IN_2_1V8
+set_location_assignment PIN_135 -to PEX_FATAL
+set_location_assignment PIN_137 -to PEX_NT_PERST
+set_location_assignment PIN_136 -to PEX_PERST
+set_location_assignment PIN_143 -to XAUI_LOSA
+set_location_assignment PIN_141 -to XAUI_LS_OK_IN
+set_location_assignment PIN_142 -to XAUI_LS_OK_OUT
+set_location_assignment PIN_138 -to XAUI_PDTRXAN
+set_location_assignment PIN_38 -to TEST_F14
+set_location_assignment PIN_53 -to CPU_RXD
+set_location_assignment PIN_52 -to CPU_TXD
+set_location_assignment PIN_39 -to ENA_CPU_BOOT_SPI
+set_location_assignment PIN_42 -to TEST_SEL
+set_location_assignment PIN_50 -to SYS_RESET_N
+set_location_assignment PIN_46 -to PM_I2C_SDA
+set_location_assignment PIN_49 -to PM_I2C_SCL
+set_location_assignment PIN_51 -to FAN_2_PWM
+set_location_assignment PIN_44 -to FAN_1_PWM
+set_location_assignment PIN_43 -to EXT_CPURESET
+set_location_assignment PIN_76 -to BMC_SPI_CS
+set_location_assignment PIN_80 -to BMC_SPI_MISO
+set_location_assignment PIN_75 -to BMC_SPI_MOSI
+set_location_assignment PIN_77 -to BMC_SPI_CLK
+set_location_assignment PIN_24 -to RST_SW
+set_location_assignment PIN_25 -to PWR_BTN
+set_location_assignment PIN_111 -to HP_PWRFLT_A
+set_instance_assignment -name IO_STANDARD "1.8 V" -to HP_PWRFLT_A
+set_instance_assignment -name IO_STANDARD "1.8 V" -to HP_PWREN_A
+set_instance_assignment -name IO_STANDARD "1.8 V" -to HP_PRSNT_A
+set_instance_assignment -name IO_STANDARD "1.8 V" -to HP_PERSTA
+set_instance_assignment -name IO_STANDARD "1.8 V" -to HP_MRL_A
+set_instance_assignment -name IO_STANDARD "1.8 V" -to HP_CLKEN
+set_instance_assignment -name IO_STANDARD "1.8 V" -to HP_BUTTON_A
+set_instance_assignment -name IO_STANDARD "1.8 V" -to HP_ATNLED
+set_instance_assignment -name IO_STANDARD "1.8 V" -to CPU_INT
+set_instance_assignment -name IO_STANDARD "1.8 V" -to HP_PWR_GOOD
+set_instance_assignment -name IO_STANDARD "1.8 V" -to HP_PWR_LED
+set_instance_assignment -name IO_STANDARD "1.8 V" -to PEX_HPC_INT
+set_location_assignment PIN_112 -to PEX_HPC_INT
+set_location_assignment PIN_113 -to HP_PRSNT_A
+set_location_assignment PIN_114 -to HP_BUTTON_A
+set_location_assignment PIN_115 -to HP_PWREN_A
+set_location_assignment PIN_119 -to HP_MRL_A
+set_location_assignment PIN_120 -to CPU_INT
+set_location_assignment PIN_121 -to HP_PWR_GOOD
+set_location_assignment PIN_124 -to HP_PWR_LED
+set_location_assignment PIN_125 -to HP_CLKEN
+set_location_assignment PIN_126 -to HP_PERSTA
+set_location_assignment PIN_127 -to HP_ATNLED
+set_location_assignment PIN_73 -to DIP_SW_2
+set_location_assignment PIN_74 -to DIP_SW_3
+set_location_assignment PIN_85 -to DIP_SW_4
+set_location_assignment PIN_91 -to DIP_SW_1
+set_instance_assignment -name IO_STANDARD "1.8 V" -to TEST_SEL
+set_instance_assignment -name IO_STANDARD "1.8 V" -to TEST_F14
+set_instance_assignment -name IO_STANDARD "1.8 V" -to SYS_RESET_N
+set_instance_assignment -name IO_STANDARD "1.8 V" -to PM_I2C_SDA
+set_instance_assignment -name IO_STANDARD "1.8 V" -to PM_I2C_SCL
+set_instance_assignment -name IO_STANDARD "1.8 V" -to FAN_2_PWM
+set_instance_assignment -name IO_STANDARD "1.8 V" -to FAN_1_PWM
+set_instance_assignment -name IO_STANDARD "1.8 V" -to EXT_CPURESET
+set_instance_assignment -name IO_STANDARD "1.8 V" -to ENA_CPU_BOOT_SPI
+set_instance_assignment -name IO_STANDARD "1.8 V" -to CPU_TXD
+set_instance_assignment -name IO_STANDARD "1.8 V" -to CPU_RXD
+set_global_assignment -name VERILOG_FILE I2C_to_GPIO.v
+set_global_assignment -name QIP_FILE software/stest/mem_init/meminit.qip
+set_global_assignment -name SDC_FILE C10_BAIKAL.out.sdc
+set_global_assignment -name QIP_FILE sopc_top/synthesis/sopc_top.qip
+set_global_assignment -name VERILOG_FILE C10_BAIKAL.v
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

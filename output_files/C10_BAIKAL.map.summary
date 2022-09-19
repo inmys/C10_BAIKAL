@@ -1,0 +1,14 @@
+Analysis & Synthesis Status : Successful - Mon Sep  5 11:08:02 2022
+Quartus Prime Version : 18.0.0 Build 614 04/24/2018 SJ Standard Edition
+Revision Name : C10_BAIKAL
+Top-level Entity Name : C10_BAIKAL
+Family : Cyclone 10 LP
+Total logic elements : 5,639
+    Total combinational functions : 4,461
+    Dedicated logic registers : 3,244
+Total registers : 3244
+Total pins : 82
+Total virtual pins : 0
+Total memory bits : 155,776
+Embedded Multiplier 9-bit elements : 6
+Total PLLs : 1

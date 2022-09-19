@@ -1,0 +1,104 @@
+/*
+ * SPI_GPIO.c
+ *
+ *  Created on: 22 июля 2020 г.
+ *      Author: ikoml
+ */
+#include "sys/alt_dev.h"
+#include "alt_types.h"
+#include "sys/alt_stdio.h"
+#include "system.h"
+#include "SPI_GPIO.h"
+#include "io.h"
+
+#define SPI_RX_REG 0
+#define SPI_TX_REG 1
+#define SPI_STATUS_REG 2
+#define SPI_CONTROL_REG 3
+#define SPI_SLAVESEL_REG 5
+#define SPI_EOPVAL_REG 6
+
+#define SPI_STAT_TRDY (1<<6)	/* transmit ready*/
+alt_u32 SPIReadReg(int id){
+	return IORD_32DIRECT(SPI_0_BASE,id*4);
+}
+
+void SPIWriteReg(int id, alt_u32 value) {
+	IOWR_32DIRECT(SPI_0_BASE,id*4,value);
+}
+
+void SPI_TxData(alt_u32 value) {
+	alt_u32 t;
+
+	while(!(SPIReadReg(SPI_STATUS_REG) & SPI_STAT_TRDY));
+	SPIWriteReg(SPI_TX_REG,value);
+}
+
+// Register addresses
+#define IODIRA 0x00  // I/O direction A
+#define IODIRB 0x01  // I/O direction B
+#define IPOLA 0x02  // I/O polarity A
+#define IPOLB 0x03  // I/O polarity B
+#define GPINTENA 0x04  // interupt enable A
+#define GPINTENB 0x05  // interupt enable B
+#define DEFVALA 0x06  // register default value A (interupts)
+#define DEFVALB 0x07  // register default value B (interupts)
+#define INTCONA 0x08  // interupt control A
+#define INTCONB 0x09  // interupt control B
+#define IOCON 0x0A  // I/O config (also 0x0B)
+#define GPPUA 0x0C  // port A pullups
+#define GPPUB 0x0D  // port B pullups
+#define INTFA 0x0E  // interupt flag A (where the interupt came from)
+#define INTFB 0x0F  // interupt flag B
+#define INTCAPA 0x10  // interupt capture A (value at interupt is saved here)
+#define INTCAPB 0x11  // interupt capture B
+#define GPIOA 0x12  // port A
+#define GPIOB 0x13  // port B
+#define OLATA 0x14  // output latch A
+#define OLATB 0x15  // output latch B
+
+#define SPI_MCP_OPCODE_READ  (0x41)
+#define SPI_MCP_OPCODE_WRITE (0x40)
+#define MCP_HW_ADDR 0x00
+
+struct {
+	alt_u32 GPIO_Val;
+	alt_u32 GPIO_Changed:1;
+}GPIO_Cntrl;
+
+void SPI_GPIOInit(){
+	GPIO_Cntrl.GPIO_Val = 0;
+	GPIO_Cntrl.GPIO_Changed = 0;
+
+	SPI_TxData(((SPI_MCP_OPCODE_WRITE|MCP_HW_ADDR)<<16)|(IODIRA<<8)|0); //Set Output
+	SPI_TxData(((SPI_MCP_OPCODE_WRITE|MCP_HW_ADDR)<<16)|(IODIRB<<8)|0); //Set Output
+}
+
+void SPI_GPIOWrite(alt_u32 pio_value){
+	SPI_TxData(((SPI_MCP_OPCODE_WRITE|MCP_HW_ADDR)<<16)|(GPIOA<<8)|(pio_value&0xff));
+	SPI_TxData(((SPI_MCP_OPCODE_WRITE|MCP_HW_ADDR)<<16)|(GPIOB<<8)|((pio_value>>8)&0xff));
+}
+
+
+void SPI_GPIO_Set(alt_u32 gpio) {
+	alt_u32 t;
+	t = GPIO_Cntrl.GPIO_Val;
+	GPIO_Cntrl.GPIO_Val |= gpio;
+	if(t != GPIO_Cntrl.GPIO_Val)
+		GPIO_Cntrl.GPIO_Changed = 1;
+}
+
+void SPI_GPIO_Clr(alt_u32 gpio) {
+	alt_u32 t;
+	t = GPIO_Cntrl.GPIO_Val;
+	GPIO_Cntrl.GPIO_Val &= ~gpio;
+	if(t != GPIO_Cntrl.GPIO_Val)
+		GPIO_Cntrl.GPIO_Changed = 1;
+}
+
+void SPI_GPIO_Mash(){
+	if(GPIO_Cntrl.GPIO_Changed) {
+		SPI_GPIOWrite(GPIO_Cntrl.GPIO_Val);
+		GPIO_Cntrl.GPIO_Changed = 0;
+	}
+}
